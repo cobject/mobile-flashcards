@@ -1,11 +1,20 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import DeckList from './components/DeckList'
+import Deck from './components/Deck'
+import NewDeck from './components/NewDeck'
+import NewQuestion from './components/NewQuestion'
+import Quiz from './components/Quiz'
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
+        <DeckList/>
+        <Deck/>
+        <NewDeck/>
+        <NewQuestion/>
+        <Quiz/>
       </View>
     );
   }
