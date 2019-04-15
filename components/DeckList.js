@@ -32,7 +32,7 @@ class DeckList extends Component {
             <View>
                 {Object.keys(this.state.decks).map((key) => {
                     return (
-                        <View>
+                        <View key={key}>
                             <Text>
                                 {this.state.decks[key].title}
                             </Text>
