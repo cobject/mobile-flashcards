@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, Text, TextInput, Platform } from 'react-native'
 import { styles } from '../utils/styles'
+import { resetDecks, getDecks, getDeck, saveDeckTitle,addCardToDeck } from '../utils/api'
 
 class Quiz extends Component {
     state = {
@@ -22,6 +23,16 @@ class Quiz extends Component {
     }
 
     render() {
+        // resetDecks()
+        console.log('------')
+        // getDecks().then((results) => console.log(results))
+        // saveDeckTitle('Test')
+        getDecks().then((results) => console.log(results))
+        // addCardToDeck({
+        //     question: 'q2',
+        //     answer: 'a2'
+        // }, 'Test')
+        console.log('------')
         const nThQuestion = 1
         const totalQuestion = 10
         const question = 'question?'
