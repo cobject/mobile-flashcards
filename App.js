@@ -1,17 +1,22 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import DeckList from './components/DeckList'
-import Deck from './components/Deck'
-import NewDeck from './components/NewDeck'
-import NewQuestion from './components/NewQuestion'
-import Quiz from './components/Quiz'
+// import Deck from './components/Deck'
+// import NewDeck from './components/NewDeck'
+// import NewQuestion from './components/NewQuestion'
+// import Quiz from './components/Quiz'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux';
+import reducers from './reducers'
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Quiz />
-      </View>
+      <Provider store={createStore(reducers)}>
+        <View style={styles.container}>
+          <DeckList />
+        </View>
+      </Provider>
     );
   }
 }

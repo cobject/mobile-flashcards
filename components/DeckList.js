@@ -1,43 +1,42 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
+import { connect } from 'react-redux'
+import { getDecks } from '../utils/api'
+import { receiveDecks } from '../actions'
+import { AppLoading} from 'expo'
 
 class DeckList extends Component {
     state = {
-        decks: {
-            aaa: {
-                id: 'aaa',
-                title: 'new deck',
-                cards: [
-                    {
-                        question: 'qqq',
-                        answer: 'aaa'
-                    }
-                ]
-            },
-            bbb: {
-                id: 'bbb',
-                title: 'new deck2',
-                cards: [
-                    {
-                        question: 'qqq',
-                        answer: 'aaa'
-                    }
-                ]
-            }
-        }
+        ready: false
+    }
+
+    componentDidMount() {
+        const { dispatch } = this.props
+
+        getDecks().then((results) => {
+            dispatch(receiveDecks(results))
+        }).then(() => this.setState({ ready: true}))
     }
 
     render() {
+        const { decks } = this.props
+
+        if(this.state.ready === false) {
+            return (
+                <AppLoading/>
+            )
+        }
+
         return (
             <View>
-                {Object.keys(this.state.decks).map((key) => {
+                {decks.map((deck) => {
                     return (
-                        <View key={key}>
+                        <View key={deck.title}>
                             <Text>
-                                {this.state.decks[key].title}
+                                {deck.title}
                             </Text>
                             <Text>
-                                {this.state.decks[key].cards.length}
+                                {deck.cards.length}
                             </Text>
                         </View>
                     )
@@ -47,4 +46,11 @@ class DeckList extends Component {
     }
 }
 
-export default DeckList
+function mapStateToProps(decks) {
+    return {
+        decks: !decks ? null: Object.keys(decks).map((key) => decks[key])
+    }
+}
+
+
+export default connect(mapStateToProps)(DeckList)

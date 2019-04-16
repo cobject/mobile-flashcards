@@ -35,5 +35,5 @@ function setDummyData () {
 export function _formatResults (results) {
     return results === null
         ? setDummyData()
-        : results
+        : JSON.parse(results)
 }
