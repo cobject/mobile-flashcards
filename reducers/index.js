@@ -8,7 +8,11 @@ function decks(state = {}, action) {
             }
         case ADD_CARD:
             return {
-
+                ...state,
+                [action.deck]: {
+                    ...state[action.deck],
+                    cards: [...state[action.deck].cards, action.card]
+                }
             }
         case RECEIVE_DECKS:
             return {

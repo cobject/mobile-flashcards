@@ -4,6 +4,7 @@ import { styles } from '../utils/styles'
 import { connect } from 'react-redux'
 import { addCardToDeck } from '../actions'
 import * as api from '../utils/api'
+import { NavigationActions } from 'react-navigation'
 
 class NewQuestion extends Component {
     state = {
@@ -23,6 +24,10 @@ class NewQuestion extends Component {
         })
     }
 
+    toBack = () => {
+        this.props.navigation.dispatch(NavigationActions.back({key: 'NewQuestion'}))
+    }
+
     handleSubmit = () => {
         let card = {
             question: this.state.question,
@@ -31,7 +36,7 @@ class NewQuestion extends Component {
         this.props.dispatch(addCardToDeck(card, this.props.id))
         api.addCardToDeck(card, this.props.id)
 
-        // TODO: navigate back
+        this.props.navigation.goBack()
     }
     render() {
         return (
