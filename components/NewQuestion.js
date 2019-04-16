@@ -24,10 +24,6 @@ class NewQuestion extends Component {
         })
     }
 
-    toBack = () => {
-        this.props.navigation.dispatch(NavigationActions.back({key: 'NewQuestion'}))
-    }
-
     handleSubmit = () => {
         let card = {
             question: this.state.question,

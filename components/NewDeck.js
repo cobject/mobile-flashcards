@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, Text, TextInput, Platform } from 'react-native'
 import { styles } from '../utils/styles'
+import { connect } from 'react-redux'
+import { addDeck } from '../actions'
+import { saveDeckTitle } from '../utils/api'
+import { NavigationActions } from 'react-navigation'
 
 class NewDeck extends Component {
     state = {
@@ -14,7 +18,19 @@ class NewDeck extends Component {
     }
 
     handleCreateDeck = () => {
-        // TODO
+        this.props.dispatch(addDeck(this.state.text))
+        saveDeckTitle(this.state.text)
+            .catch((error) => {
+                console.log(error)
+            })
+        this.setState({
+            text: ''
+        })
+        this.toHome()
+    }
+
+    toHome = () => {
+        this.props.navigation.dispatch(NavigationActions.back({key: 'NewDeck'}))
     }
 
     render() {
@@ -36,4 +52,4 @@ class NewDeck extends Component {
     }
 }
 
-export default NewDeck
+export default connect()(NewDeck)
