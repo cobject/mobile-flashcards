@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { getDecks } from '../utils/api'
 import { receiveDecks } from '../actions'
@@ -18,6 +18,13 @@ class DeckList extends Component {
         }).then(() => this.setState({ ready: true}))
     }
 
+    handlePress = (id, navigation) => {
+        navigation.navigate(
+            'Deck',
+            { entryId: id }
+        )
+    }
+
     render() {
         const { decks } = this.props
 
@@ -31,14 +38,16 @@ class DeckList extends Component {
             <View>
                 {decks.map((deck) => {
                     return (
-                        <View key={deck.title}>
+                        <TouchableOpacity
+                            key={deck.title}
+                            onPress={() => this.handlePress(deck.title, this.props.navigation)}>
                             <Text>
                                 {deck.title}
                             </Text>
                             <Text>
                                 {deck.cards.length}
                             </Text>
-                        </View>
+                        </TouchableOpacity>
                     )
                 })}
             </View>
