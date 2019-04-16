@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, Text, TextInput, Platform } from 'react-native'
 import { styles } from '../utils/styles'
-import { resetDecks, getDecks, getDeck, saveDeckTitle,addCardToDeck } from '../utils/api'
+import { connect } from 'react-redux'
 
 class Quiz extends Component {
     state = {
-        isAnswer: false
+        isAnswer: false,
+        currentCard: 0,
+        correctCount: 0
     }
 
     handleAnswerOrQuestion = () => {
@@ -15,32 +17,56 @@ class Quiz extends Component {
     }
 
     handleCorrect = () => {
-
+        this.setState((prevState) => ({
+            isAnswer: false,
+            currentCard: ++prevState.currentCard,
+            correctCount: ++prevState.correctCount
+        }))
     }
 
     handleIncorrect = () => {
+        this.setState((prevState) => ({
+            isAnswer: false,
+            currentCard: ++prevState.currentCard,
+        }))
+    }
 
+    handleRestartQuiz = () => {
+        this.setState({
+            isAnswer: false,
+            currentCard: 0,
+            correctCount: 0
+        })
+    }
+
+    handleBackToDeck = () => {
+        this.props.navigation.goBack()
     }
 
     render() {
-        // resetDecks()
-        console.log('------')
-        // getDecks().then((results) => console.log(results))
-        // saveDeckTitle('Test')
-        getDecks().then((results) => console.log(results))
-        // addCardToDeck({
-        //     question: 'q2',
-        //     answer: 'a2'
-        // }, 'Test')
-        console.log('------')
-        const nThQuestion = 1
-        const totalQuestion = 10
-        const question = 'question?'
-        const answer = 'aaaa'
+        const isFinished = this.state.currentCard >= this.props.total ? true: false
 
+        if(isFinished === true) {
+            return (
+                <View>
+                    <Text>Percentage of correct answer is {this.state.correctCount/this.props.total * 100}%</Text>
+                    <TouchableOpacity
+                        style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
+                        onPress={this.handleRestartQuiz}>
+                        <Text style={styles.submitBtnText}>Restart Quiz</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
+                        onPress={this.handleBackToDeck}>
+                        <Text style={styles.submitBtnText}>Back to deck</Text>
+                    </TouchableOpacity>
+                </View>
+            )
+        }
+        const { question, answer } = this.props.cards[this.state.currentCard]
         return (
             <View>
-                <Text>{nThQuestion}/{totalQuestion}</Text>
+                <Text>{ this.state.currentCard + 1 }/{ this.props.total }</Text>
                 <Text>{ this.state.isAnswer ? answer: question}</Text>
                 <TouchableOpacity
                     style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
@@ -62,4 +88,13 @@ class Quiz extends Component {
     }
 }
 
-export default Quiz
+function mapStateToProps(decks, {navigation}) {
+    const { entryId } = navigation.state.params
+
+    return {
+        cards: decks[entryId].cards,
+        total: decks[entryId].cards.length
+    }
+}
+
+export default connect(mapStateToProps)(Quiz)
