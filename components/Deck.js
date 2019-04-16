@@ -6,11 +6,16 @@ import { connect } from 'react-redux'
 class Deck extends Component {
 
     handleAddCard = () => {
-
+        this.props.navigation.navigate(
+            'NewQuestion',
+        )
     }
 
-    handleStartQuiz = () => {
-
+    handleStartQuiz = (id) => {
+        this.props.navigation.navigate(
+            'Quiz',
+            { entryId: id }            
+        )
     }
 
     render() {
@@ -27,7 +32,7 @@ class Deck extends Component {
             </TouchableOpacity>
             <TouchableOpacity
                 style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
-                onPress={this.handleStartQuiz}>
+                onPress={() => this.handleStartQuiz(deck.title)}>
                 <Text style={styles.submitBtnText}>Start Quiz</Text>
             </TouchableOpacity>
         </View>

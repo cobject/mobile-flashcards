@@ -3,8 +3,8 @@ import { StyleSheet, Text, View, Platform } from 'react-native';
 import DeckList from './components/DeckList'
 import Deck from './components/Deck'
 import NewDeck from './components/NewDeck'
-// import NewQuestion from './components/NewQuestion'
-// import Quiz from './components/Quiz'
+import NewQuestion from './components/NewQuestion'
+import Quiz from './components/Quiz'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux';
 import reducers from './reducers'
@@ -54,8 +54,17 @@ const MainNavigator = createStackNavigator({
   Home: {
     screen: Tabs
   },
-  NewDeck: {
-    screen: NewDeck,
+  NewQuestion: {
+    screen: NewQuestion,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  },
+  Quiz: {
+    screen: Quiz,
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {
