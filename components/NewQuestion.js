@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, Text, TextInput, Platform } from 'react-native'
 import { styles } from '../utils/styles'
+import { connect } from 'react-redux'
+import { addCardToDeck } from '../actions'
+import * as api from '../utils/api'
 
 class NewQuestion extends Component {
     state = {
@@ -21,7 +24,14 @@ class NewQuestion extends Component {
     }
 
     handleSubmit = () => {
-        // TODO
+        let card = {
+            question: this.state.question,
+            answer: this.state.answer
+        }
+        this.props.dispatch(addCardToDeck(card, this.props.id))
+        api.addCardToDeck(card, this.props.id)
+
+        // TODO: navigate back
     }
     render() {
         return (
@@ -46,4 +56,10 @@ class NewQuestion extends Component {
     }
 }
 
-export default NewQuestion
+function mapStateToProps(decks, { navigation}) {
+    return {
+        id: navigation.state.params.entryId
+    }
+}
+
+export default connect(mapStateToProps)(NewQuestion)

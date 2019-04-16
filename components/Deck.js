@@ -8,6 +8,7 @@ class Deck extends Component {
     handleAddCard = () => {
         this.props.navigation.navigate(
             'NewQuestion',
+            { entryId: this.props.deck.title }
         )
     }
 
@@ -20,7 +21,7 @@ class Deck extends Component {
 
     render() {
         const { deck } = this.props
-
+        
         return (
         <View>
             <Text>{deck.title}</Text>
@@ -40,7 +41,7 @@ class Deck extends Component {
     }
 }
 
-function mapStateToProps(decks, { navigation}) {
+function mapStateToProps(decks, { navigation }) {
     const { entryId } = navigation.state.params
 
     return {
