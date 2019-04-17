@@ -23,19 +23,23 @@ class Deck extends Component {
         const { deck } = this.props
         
         return (
-        <View>
-            <Text>{deck.title}</Text>
-            <Text>{deck.cards.length} cards</Text>
-            <TouchableOpacity
-                style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
-                onPress={this.handleAddCard}>
-                <Text style={styles.submitBtnText}>Add Card</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
-                onPress={() => this.handleStartQuiz(deck.title)}>
-                <Text style={styles.submitBtnText}>Start Quiz</Text>
-            </TouchableOpacity>
+        <View style={styles.container}>
+            <View style={{flex: 3, justifyContent:'center', alignItems: 'center'}}>
+                <Text style={{fontSize: 40}}>{deck.title}</Text>
+                <Text style={{fontSize: 20}}>{deck.cards.length} cards</Text>
+            </View>
+            <View style={{flex: 1, justifyContent: 'space-around'}}>
+                <TouchableOpacity
+                    style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
+                    onPress={this.handleAddCard}>
+                    <Text style={styles.submitBtnText}>Add Card</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
+                    onPress={() => this.handleStartQuiz(deck.title)}>
+                    <Text style={styles.submitBtnText}>Start Quiz</Text>
+                </TouchableOpacity>
+            </View>
         </View>
         )
     }
