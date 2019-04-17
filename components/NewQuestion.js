@@ -36,7 +36,7 @@ class NewQuestion extends Component {
     }
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <TextInput
                     maxLength={200}
                     style={{height: 40, borderColor: 'gray', borderWidth: 1}}

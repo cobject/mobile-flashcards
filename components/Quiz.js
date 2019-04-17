@@ -48,7 +48,7 @@ class Quiz extends Component {
 
         if(isFinished === true) {
             return (
-                <View>
+                <View style={styles.container}>
                     <Text>Percentage of correct answer is {this.state.correctCount/this.props.total * 100}%</Text>
                     <TouchableOpacity
                         style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.AndroidSubmitBtn}
@@ -65,7 +65,7 @@ class Quiz extends Component {
         }
         const { question, answer } = this.props.cards[this.state.currentCard]
         return (
-            <View>
+            <View style={styles.container}>
                 <Text>{ this.state.currentCard + 1 }/{ this.props.total }</Text>
                 <Text>{ this.state.isAnswer ? answer: question}</Text>
                 <TouchableOpacity
