@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Text, TextInput, Platform } from 'react-native'
+import { View, TouchableOpacity, Text, TextInput, Platform, KeyboardAvoidingView } from 'react-native'
 import { styles } from '../utils/styles'
 import { connect } from 'react-redux'
 import { addDeck } from '../actions'
@@ -35,11 +35,11 @@ class NewDeck extends Component {
 
     render() {
         return (
-            <View>
-                <Text>What is the title of your new deck</Text>
+            <KeyboardAvoidingView behavior='padding' style={styles.container}>
+                <Text style={{fontSize: 20}}>What is the title of your new deck</Text>
                 <TextInput
                     maxLength={200}
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                    style={{height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 5}}
                     onChangeText={this.handleChangeText}
                     value={this.state.text} />
                 <TouchableOpacity
@@ -47,7 +47,7 @@ class NewDeck extends Component {
                     onPress={this.handleCreateDeck}>
                     <Text style={styles.submitBtnText}>Create Deck</Text>
                 </TouchableOpacity>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }

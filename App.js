@@ -14,6 +14,7 @@ import { createAppContainer,
 } from 'react-navigation'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { white, purple } from './utils/colors'
+import { Constants } from 'expo'
 
 const Tabs = createBottomTabNavigator({
   DeckList: {
@@ -90,7 +91,9 @@ export default class App extends React.Component {
     return (
       <Provider store={createStore(reducers)}>
         <View style={{flex: 1}}>
-          <StatusBar translucent backgroundColor={purple} {...this.props} />
+          <View style={{ purple, height: Constants.statusBarHeight }}>
+            <StatusBar translucent backgroundColor={purple} {...this.props} />
+          </View>
           <AppContainer />
         </View>
       </Provider>
