@@ -1,10 +1,6 @@
-# UdaciCards
+# Mobile flash cards
 
-TBD
-
-# Objectives
-
-1. TBD
+This project is to build mobile application that allows users to study collections of flashcards using raact native.
 
 # Installation
 
@@ -14,10 +10,10 @@ TBD
 2. start application
    `$yarn start`
 
-# Test
+# Test Result
 
 - [x] iOS device tested(or emulator)
-- [ ] Android device tested(or emulator)
+- [x] Android device tested(or emulator)
 
 # Checklist
 
@@ -35,14 +31,10 @@ TBD
 - [x] Does the New Question view function correctly?
 - [x] Does the Quiz View function correctly?
 - [x] Does the New Deck view work correctly?
-- [ ] Does the user receive a notification at a particular time if they haven't studied that day?
+- [x] Does the user receive a notification at a particular time if they haven't studied that day?
 - [x] Does the app function correctly in either Android or iOS?
 
 ## Code Quality
 
 - [x] Is the code well written and reasonably structured?
 - [x] Does the code run without errors? Is the code free of warnings that resulted from not following the best practices listed in the documentation, such as using key for list items? Is the code formatted properly? 
-
-# Lessons learned
-
-1. TBD
